@@ -1,5 +1,6 @@
 package xyz.wismer.jimp.project.jira;
 
+import xyz.wismer.jimp.project.JimpWorkEntry;
 import xyz.wismer.jimp.project.Project;
 
 /**
@@ -12,8 +13,16 @@ public interface JiraProject extends Project {
 	String getJiraIdentifier();
 	
 	/**
-	 * The query to get all relevant tickets. Filtering by project and non-empty imputation number is done by the
+	 * The query to get all relevant tickets. Filtering by project is done by the
 	 * caller. The query is executed at least once (after the startup of Jimp).
 	 */
 	String getJiraQuery();
+
+	/**
+	 * Get the JIRA ticket for time tracking matching to the query.
+	 *
+	 * @param query the work package query
+	 * @return the result of the lookup
+	 */
+	JiraTicketLookupResult getWorkLogTicket(JimpWorkEntry query);
 }

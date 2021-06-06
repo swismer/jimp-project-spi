@@ -7,12 +7,14 @@ import java.time.LocalDate;
  */
 public class JimpWorkEntry {
 	private final LocalDate date;
+	private final String ticketId;
 	private final String description;
 	private final String workPackage;
 	
 	
-	public JimpWorkEntry(LocalDate date, String description, String workPackage) {
+	public JimpWorkEntry(LocalDate date, String ticketId, String description, String workPackage) {
 		this.date = date;
+		this.ticketId = ticketId;
 		this.description = description;
 		this.workPackage = workPackage;
 	}
@@ -22,6 +24,13 @@ public class JimpWorkEntry {
 	 */
 	public LocalDate getDate() {
 		return date;
+	}
+
+	/**
+	 * Get the ticket ID of this work entry.
+	 */
+	public String getTicketId() {
+		return ticketId;
 	}
 
 	/**
@@ -40,6 +49,6 @@ public class JimpWorkEntry {
 	
 	@Override
 	public String toString() {
-		return description + "/" + workPackage + "@" + date;
+		return (ticketId != null ? ticketId + ": " : "") + description + "/" + workPackage + "@" + date;
 	}
 }

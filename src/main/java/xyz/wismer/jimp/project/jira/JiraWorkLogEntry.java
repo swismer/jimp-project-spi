@@ -7,13 +7,18 @@ import java.time.LocalDateTime;
  * An entry in the JIRA work log.
  */
 public class JiraWorkLogEntry {
-	private long id = -1;
-	private final LocalDateTime date;
+	private long id;
+	private LocalDateTime date;
 	private String author;
 	private String comment;
 	private Duration duration;
-	
-	public JiraWorkLogEntry(LocalDateTime date, String author, String comment, Duration duration) {
+
+	public JiraWorkLogEntry(String comment, Duration duration) {
+		this(-1, null, null, comment, duration);
+	}
+
+	public JiraWorkLogEntry(long id, LocalDateTime date, String author, String comment, Duration duration) {
+		this.id = id;
 		this.date = date;
 		this.author = author;
 		this.comment = comment;
@@ -69,5 +74,12 @@ public class JiraWorkLogEntry {
 
 	public void setDuration(Duration duration) {
 		this.duration = duration;
+	}
+
+	@Override
+	public String toString() {
+		return "JiraWorkLogEntry{" +
+				"duration=" + duration +
+				'}';
 	}
 }

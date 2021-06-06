@@ -112,6 +112,11 @@ public class JiraTicket {
 
 	@Override
 	public String toString() {
-		return id + " (" + type + "): " + title + " [" + Objects.toString(workPackage, "") + "]";
+		StringBuilder sb = new StringBuilder(id);
+		sb.append(" (").append(type).append("): ").append(title);
+		if (workPackage != null && !workPackage.isEmpty()) {
+			sb.append(" [").append(workPackage).append("]");
+		}
+		return sb.toString();
 	}
 }

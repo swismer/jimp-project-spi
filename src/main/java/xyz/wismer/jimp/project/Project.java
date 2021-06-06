@@ -48,10 +48,10 @@ public interface Project {
 	
 	
 	/**
-	 * Get work package suggestions based on given service description and date.
+	 * Get work package suggestions based on given work entry data.
 	 * 
 	 * Implementations should return as quick as possible otherwise the user experience gets degraded. Lookups in
-	 * external systems should be postponed using the aforementioned references.
+	 * external systems should not be done.
 	 * 
 	 * @param query the work entry to provide a suggestion for
 	 */

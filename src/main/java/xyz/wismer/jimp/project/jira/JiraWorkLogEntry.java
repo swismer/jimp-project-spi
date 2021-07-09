@@ -13,10 +13,16 @@ public class JiraWorkLogEntry {
 	private String comment;
 	private Duration duration;
 
-	public JiraWorkLogEntry(String comment, Duration duration) {
-		this(-1, null, null, comment, duration);
+	/**
+	 * Create a new work log entry that has not yet been stored in JIRA.
+	 */
+	public JiraWorkLogEntry(LocalDateTime date, String comment, Duration duration) {
+		this(-1, date, null, comment, duration);
 	}
 
+	/**
+	 * Create a work log entry that has been stored in JIRA.
+	 */
 	public JiraWorkLogEntry(long id, LocalDateTime date, String author, String comment, Duration duration) {
 		this.id = id;
 		this.date = date;

@@ -19,10 +19,10 @@ public interface JiraProject extends Project {
 	String getJiraQuery();
 
 	/**
-	 * Get the JIRA ticket for time tracking matching to the query.
+	 * Find the JIRA ticket matching to the query.
 	 *
 	 * @param query the work package query
 	 * @return the result of the lookup
 	 */
-	JiraTicketLookupResult getWorkLogTicket(JimpWorkEntry query);
+	JiraTicketLookupResult findJiraTicket(JimpWorkEntry query);
 }

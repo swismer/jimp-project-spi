@@ -1,5 +1,7 @@
 package xyz.wismer.jimp.project;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 /**
  * A suggestion regarding a work package including a description.
  */
@@ -15,6 +17,7 @@ public class WorkPackageIdSuggestion {
 	/**
 	 * Get the work package ID of this suggestion.
 	 */
+	@NonNull
 	public String getWorkPackageId() {
 		return workPackageId;
 	}
@@ -22,6 +25,7 @@ public class WorkPackageIdSuggestion {
 	/**
 	 * Get a description of this suggestion to show to the user.
 	 */
+	@NonNull
 	public String getDescription() {
 		return description;
 	}

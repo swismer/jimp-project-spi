@@ -1,7 +1,6 @@
 package xyz.wismer.jimp.project.jira;
 
 import java.time.Duration;
-import java.util.Objects;
 
 /**
  * A JIRA ticket. Only the most important fields are available.

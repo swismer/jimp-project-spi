@@ -7,23 +7,25 @@ import edu.umd.cs.findbugs.annotations.CheckForNull;
  */
 public class JiraTicketLookupResult {
 	private final JiraTicket ticket;
+	private final boolean useTimeTracking;
 	private final String errorMessage;
 	
-	private JiraTicketLookupResult(JiraTicket ticket, String errorMessage) {
+	private JiraTicketLookupResult(JiraTicket ticket, boolean useTimeTracking, String errorMessage) {
 		this.ticket = ticket;
+		this.useTimeTracking = useTimeTracking;
 		this.errorMessage = errorMessage;
 	}
 	
-	public static JiraTicketLookupResult ofTicket(JiraTicket ticket) {
-		return new JiraTicketLookupResult(ticket, null);
+	public static JiraTicketLookupResult ofTicket(JiraTicket ticket, boolean useTimeTracking) {
+		return new JiraTicketLookupResult(ticket, useTimeTracking, null);
 	}
 	
 	public static JiraTicketLookupResult ofNoResult() {
-		return new JiraTicketLookupResult(null, null);
+		return new JiraTicketLookupResult(null, false, null);
 	}
 	
 	public static JiraTicketLookupResult ofError(String errorMessage) {
-		return new JiraTicketLookupResult(null, errorMessage);
+		return new JiraTicketLookupResult(null, false, errorMessage);
 	}
 
 	/**
@@ -32,6 +34,13 @@ public class JiraTicketLookupResult {
 	@CheckForNull
 	public JiraTicket getTicket() {
 		return ticket;
+	}
+
+	/**
+	 * Whether to use time tracking or not.
+	 */
+	public boolean isUseTimeTracking() {
+		return useTimeTracking;
 	}
 
 	/**

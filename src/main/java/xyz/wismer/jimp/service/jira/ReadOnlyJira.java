@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.umd.cs.findbugs.annotations.CheckForNull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 import xyz.wismer.jimp.project.Project;
 import xyz.wismer.jimp.project.jira.JiraProject;
@@ -33,6 +34,7 @@ public interface ReadOnlyJira {
 	 *         ticket is available)
 	 * @throws JiraException if an error occurred while accessing JIRA
 	 */
+	@NonNull
 	Map<String, JiraTicket> loadJiraTickets(Collection<String> ticketIds) throws JiraException;
 
 	/**
@@ -42,5 +44,6 @@ public interface ReadOnlyJira {
 	 * @return the work log entries
 	 * @throws JiraException if an error occurred while accessing JIRA
 	 */
+	@NonNull
 	List<JiraWorkLogEntry> getJiraWorkLogEntries(String ticketId) throws JiraException;
 }

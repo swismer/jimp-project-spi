@@ -1,7 +1,11 @@
 package xyz.wismer.jimp.project.jira;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import xyz.wismer.jimp.project.JimpWorkEntry;
 import xyz.wismer.jimp.project.Project;
+import xyz.wismer.jimp.service.jira.JiraAccessMode;
+
+import java.util.Collection;
 
 /**
  * An extended project interface for projects backed by JIRA.
@@ -10,19 +14,25 @@ public interface JiraProject extends Project {
 	/**
 	 * The project identifier in JIRA (uppercase letters without spaces).
 	 */
+	@NonNull
 	String getJiraIdentifier();
-	
-	/**
-	 * The query to get all relevant tickets. Filtering by project is done by the
-	 * caller. The query is executed at least once (after the startup of Jimp).
-	 */
-	String getJiraQuery();
 
 	/**
-	 * Find the JIRA ticket matching to the query.
+	 * Get all relevant tickets of this project. Used to provide search functionality.
 	 *
-	 * @param query the work package query
+	 * @param mode the JIRA access mode
+	 * @return the relevant tickets
+	 */
+	@NonNull
+	Collection<JiraTicket> getAllJiraTickets(JiraAccessMode mode);
+
+	/**
+	 * Get the JIRA ticket for a given work entry.
+	 *
+	 * @param workEntry the work entry
+	 * @param mode the JIRA access mode
 	 * @return the result of the lookup
 	 */
-	JiraTicketLookupResult findJiraTicket(JimpWorkEntry query);
+	@NonNull
+	JiraTicketLookupResult getJiraTicket(JimpWorkEntry workEntry, JiraAccessMode mode);
 }

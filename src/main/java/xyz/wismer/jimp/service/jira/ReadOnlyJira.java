@@ -2,13 +2,12 @@ package xyz.wismer.jimp.service.jira;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import edu.umd.cs.findbugs.annotations.CheckForNull;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
 import xyz.wismer.jimp.project.Project;
-import xyz.wismer.jimp.project.jira.JiraProject;
 import xyz.wismer.jimp.project.jira.JiraTicket;
 import xyz.wismer.jimp.project.jira.JiraWorkLogEntry;
 
@@ -17,25 +16,45 @@ import xyz.wismer.jimp.project.jira.JiraWorkLogEntry;
  */
 public interface ReadOnlyJira {
 	/**
-	 * Lookup a ticket in the project's JIRA. There is no JIRA access inside this method call, but only the results
-	 * previously fetched using the provided query in {@link JiraProject#getJiraQuery()} are available.
+	 * Lookup a ticket in this JIRA instance.
 	 *
 	 * @param ticketId the JIRA ticket ID of the form (PROJECTID-1234).
-	 * @return the JIRA ticket or <code>null</code> if none is available
+	 * @param mode the JIRA access mode
+	 * @return the JIRA ticket or <code>null</code> if none is available (also depending on access mode)
+	 * @throws JiraException if an error occurred while accessing JIRA
 	 */
 	@CheckForNull
-	JiraTicket getJiraTicket(String ticketId);
+	default JiraTicket getJiraTicket(String ticketId, JiraAccessMode mode) throws JiraException {
+		return getJiraTickets(List.of(ticketId), mode).stream().findFirst().orElse(null);
+	}
 
 	/**
-	 * Lookup tickets in the project's JIRA. Cached tickets get updated.
-	 * 
+	 * Lookup tickets in this JIRA instance.
+	 *
 	 * @param ticketIds the JIRA ticket IDs of the form (PROJECTID-1234).
-	 * @return a map containing the lookup result for each requested ticket (might contain <code>null</code> if no
-	 *         ticket is available)
+	 * @return the available JIRA tickets (depending on access mode)
 	 * @throws JiraException if an error occurred while accessing JIRA
 	 */
 	@NonNull
-	Map<String, JiraTicket> loadJiraTickets(Collection<String> ticketIds) throws JiraException;
+	Set<JiraTicket> getJiraTickets(Collection<String> ticketIds, JiraAccessMode mode) throws JiraException;
+
+	/**
+	 * Execute a JIRA query and return the matching tickets. Cached tickets get updated.
+	 *
+	 * @param jql the JIRA query
+	 * @return the matching tickets
+	 * @throws JiraException if an error occurred while accessing JIRA
+	 */
+	@NonNull
+	Collection<JiraTicket> queryJiraTickets(String jql) throws JiraException;
+
+	/**
+	 * Get all cached JIRA tickets for a project.
+	 *
+	 * @param projectId the project of the tickets or null to get all
+	 * @return a set of cached JIRA tickets
+	 */
+	Set<JiraTicket> getCachedJiraTickets(String projectId);
 
 	/**
 	 * Get the work log entries for the given JIRA ticket.

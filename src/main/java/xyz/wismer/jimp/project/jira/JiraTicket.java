@@ -10,16 +10,22 @@ public class JiraTicket {
 	private final String type;
 	private final String title;
 	private final String workPackage;
-	
+	private final String feature;
+
 	private String assignee;
 	private Duration timeSpent;
 	private Duration timeEstimate;
-	
-	public JiraTicket(String id, String type, String title, String workPackage) {
+
+	public JiraTicket(String id, String type, String title) {
+		this(id, type, title, null, null);
+	}
+
+	public JiraTicket(String id, String type, String title, String workPackage, String feature) {
 		this.id = id;
 		this.type = type;
 		this.title = title;
 		this.workPackage = workPackage;
+		this.feature = feature;
 	}
 
 	/**
@@ -48,6 +54,13 @@ public class JiraTicket {
 	 */
 	public String getWorkPackage() {
 		return workPackage;
+	}
+
+	/**
+	 * Get feature ticket or null if none is set.
+	 */
+	public String getFeature() {
+		return feature;
 	}
 
 	/**

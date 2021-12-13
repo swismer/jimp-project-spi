@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  */
 public class JiraWorkLogEntry {
 	private long id;
-	private LocalDateTime date;
+	private LocalDateTime start;
 	private String author;
 	private String comment;
 	private Duration duration;
@@ -16,16 +16,16 @@ public class JiraWorkLogEntry {
 	/**
 	 * Create a new work log entry that has not yet been stored in JIRA.
 	 */
-	public JiraWorkLogEntry(LocalDateTime date, String comment, Duration duration) {
-		this(-1, date, null, comment, duration);
+	public JiraWorkLogEntry(LocalDateTime start, String comment, Duration duration) {
+		this(-1, start, null, comment, duration);
 	}
 
 	/**
 	 * Create a work log entry that has been stored in JIRA.
 	 */
-	public JiraWorkLogEntry(long id, LocalDateTime date, String author, String comment, Duration duration) {
+	public JiraWorkLogEntry(long id, LocalDateTime start, String author, String comment, Duration duration) {
 		this.id = id;
-		this.date = date;
+		this.start = start;
 		this.author = author;
 		this.comment = comment;
 		this.duration = duration;
@@ -43,10 +43,14 @@ public class JiraWorkLogEntry {
 	}
 
 	/**
-	 * Get the date and time when this entry has been created or updated.
+	 * Get the date and time when work has been started.
 	 */
-	public LocalDateTime getDate() {
-		return date;
+	public LocalDateTime getStart() {
+		return start;
+	}
+
+	public void setStart(LocalDateTime start) {
+		this.start = start;
 	}
 
 	/**

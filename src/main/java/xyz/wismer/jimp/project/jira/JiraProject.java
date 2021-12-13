@@ -35,4 +35,14 @@ public interface JiraProject extends Project {
 	 */
 	@NonNull
 	JiraTicketLookupResult getJiraTicket(JimpWorkEntry workEntry, JiraAccessMode mode);
+
+	/**
+	 * Get the temporal unit to group all work hours to a single work log entry.
+	 *
+	 * @return the work log grouping
+	 */
+	@NonNull
+	default WorkLogGrouping getWorkLogGrouping() {
+		return WorkLogGrouping.DAY;
+	}
 }

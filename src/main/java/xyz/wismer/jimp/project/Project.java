@@ -13,6 +13,9 @@ import edu.umd.cs.findbugs.annotations.Nullable;
  * {@link java.util.ServiceLoader} mechanism (i.e. they must be registered in META-INF/services/xyz.wismer.jimp.project.Project)
  */
 public interface Project {
+
+	int SPI_MAJOR_VERSION = 1;
+	int SPI_MINOR_VERSION = 0;
 	
 	/**
 	 * The name of this project.

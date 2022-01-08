@@ -20,14 +20,16 @@
 			<version>2.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>jakarta.annotation</groupId>
-			<artifactId>jakarta.annotation-api</artifactId>
-			<version>2.0.0</version>
-		</dependency>
-		<dependency>
 			<groupId>com.github.spotbugs</groupId>
 			<artifactId>spotbugs-annotations</artifactId>
-			<version>3.1.1</version>
+			<version>4.5.3</version>
+			<exclusions>
+				<!-- do not use javax annotations as they have never been officially released -->
+				<exclusion>
+					<groupId>com.google.code.findbugs</groupId>
+					<artifactId>jsr305</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 	

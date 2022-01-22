@@ -1,6 +1,6 @@
 package xyz.wismer.jimp.project;
 
-import java.net.URL;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +21,10 @@ public interface Project {
 	String getName();
 	
 	/**
-	 * The URL of this project's icon (preferably of size 16x16 px).
+	 * The input stream to get this project's icon (preferably of size 16x16 px).
 	 */
 	@Nullable
-	URL getIcon();
+	InputStream getIcon();
 	
 	/**
 	 * The project IDs (first number in service IDs) used in Vertec.
@@ -41,16 +41,16 @@ public interface Project {
 	
 	
 	/**
-	 * The URL of this project's templates in JSON format or <code>null</code> if there are no templates.
+	 * The input stream to get this project's templates in JSON format or <code>null</code> if there are none.
 	 */
 	@Nullable
-	URL getTemplatesJson();
+	InputStream getTemplatesJson();
 	
 	/**
-	 * The URL of this project's restrictions in JSON format or <code>null</code> if there are no restrictions.
+	 * The input stream to get this project's restrictions in JSON format or <code>null</code> if there are none.
 	 */
 	@Nullable
-	URL getRestrictionsJson();
+	InputStream getRestrictionsJson();
 	
 	/**
 	 * Get work package suggestions based on given work entry data.

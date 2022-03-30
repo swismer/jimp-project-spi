@@ -14,7 +14,7 @@ import edu.umd.cs.findbugs.annotations.Nullable;
  */
 public interface Project {
 
-	int SPI_MAJOR_VERSION = 1;
+	int SPI_MAJOR_VERSION = 2;
 	int SPI_MINOR_VERSION = 0;
 	
 	/**
@@ -36,25 +36,25 @@ public interface Project {
 	Collection<String> getProjectIds();
 	
 	/**
-	 * A collection of work package IDs common to this project. It is ensured that these packages are always known and
-	 * therefore available in the lookup process.
+	 * A collection of work package or subproject IDs common to this project. It is ensured that these packages are
+	 * always known and therefore available in the lookup process.
 	 */
 	@NonNull
 	Collection<String> getCommonWorkPackageIds();
 	
 	
 	/**
-	 * The input stream to get this project's templates in JSON format or <code>null</code> if there are none.
+	 * The work entry templates provided by this project.
 	 */
-	@Nullable
-	InputStream getTemplatesJson();
+	@NonNull
+	Collection<JimpWorkEntryTemplate> getTemplates();
 	
 	/**
-	 * The input stream to get this project's restrictions in JSON format or <code>null</code> if there are none.
+	 * The work entry validators for this project.
 	 */
-	@Nullable
-	InputStream getRestrictionsJson();
-	
+	@NonNull
+	Collection<Validator> getValidators();
+
 	/**
 	 * Get work package suggestions based on given work entry data.
 	 * 

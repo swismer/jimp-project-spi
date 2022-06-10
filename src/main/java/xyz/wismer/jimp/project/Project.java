@@ -9,8 +9,7 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
- * The API to integrate project specific functionality into Jimp. Implementations get discovered using Java's
- * {@link java.util.ServiceLoader} mechanism (i.e. they must be registered in META-INF/services/xyz.wismer.jimp.project.Project)
+ * The API to integrate project specific functionality into Jimp.
  */
 public interface Project {
 

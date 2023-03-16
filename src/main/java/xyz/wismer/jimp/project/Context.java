@@ -2,6 +2,7 @@ package xyz.wismer.jimp.project;
 
 import java.nio.file.Path;
 import java.time.Duration;
+import java.time.LocalDate;
 
 /**
  * The context for the Jimp project API. Provides access to some services provided by the Jimp application. Can be
@@ -14,12 +15,10 @@ public interface Context {
 	String getUsername();
 
 	/**
-	 * Get the duration that the user is expected to work at one day, e.g. 8h
+	 * Get the duration that the user is expected to work at the given day. Is zero on weekends and holidays.
 	 */
-	default Duration getDailyWorkLoad() {
-		return Duration.ofMinutes(8 * 60 + 12);
-	}
-	
+	Duration getTargetWorkingTime(LocalDate date);
+
 	/**
 	 * Get the path to the directory where the Jimp data is stored. Must not be used to access files written by Jimp,
 	 * but can be used to persist project specific data.

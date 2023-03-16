@@ -1,7 +1,9 @@
 package xyz.wismer.jimp.project;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.function.Function;
 
 /**
  * A template for a re-usable work entry in Jimp (e.g. for Holidays).
@@ -14,8 +16,8 @@ public class JimpWorkEntryTemplate {
 
 	/** the default start time for the work entry (otherwise the current time is used) */
 	private LocalTime defaultFrom;
-	/** the duration of the work entry */
-	private Duration duration;
+	/** the duration of the work entry for the given day */
+	private Function<LocalDate, Duration> durationProvider;
 
 	private String description;
 	private String workPackage;
@@ -25,10 +27,10 @@ public class JimpWorkEntryTemplate {
 		this.name = name;
 	}
 
-	public JimpWorkEntryTemplate(String name, LocalTime defaultFrom, Duration duration, String description, String workPackage) {
+	public JimpWorkEntryTemplate(String name, LocalTime defaultFrom, Function<LocalDate, Duration> durationProvider, String description, String workPackage) {
 		this.name = name;
 		this.defaultFrom = defaultFrom;
-		this.duration = duration;
+		this.durationProvider = durationProvider;
 		this.description = description;
 		this.workPackage = workPackage;
 	}
@@ -53,12 +55,12 @@ public class JimpWorkEntryTemplate {
 		this.defaultFrom = defaultFrom;
 	}
 
-	public Duration getDuration() {
-		return duration;
+	public Function<LocalDate, Duration> getDurationProvider() {
+		return durationProvider;
 	}
 
-	public void setDuration(Duration duration) {
-		this.duration = duration;
+	public void setDurationProvider(Function<LocalDate, Duration> durationProvider) {
+		this.durationProvider = durationProvider;
 	}
 
 	public String getDescription() {

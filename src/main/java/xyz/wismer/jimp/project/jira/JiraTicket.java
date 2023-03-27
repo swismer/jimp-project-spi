@@ -1,6 +1,7 @@
 package xyz.wismer.jimp.project.jira;
 
 import java.time.Duration;
+import java.util.List;
 
 /**
  * A JIRA ticket. Only the most important fields are available.
@@ -11,21 +12,27 @@ public class JiraTicket {
 	private final String title;
 	private final String workPackage;
 	private final String feature;
+	private final List<String> components;
 
 	private String assignee;
 	private Duration timeSpent;
 	private Duration timeEstimate;
 
 	public JiraTicket(String id, String type, String title) {
-		this(id, type, title, null, null);
+		this(id, type, title, null, null, List.of());
 	}
 
 	public JiraTicket(String id, String type, String title, String workPackage, String feature) {
+		this(id, type, title, workPackage, feature, List.of());
+	}
+
+	public JiraTicket(String id, String type, String title, String workPackage, String feature, List<String> components) {
 		this.id = id;
 		this.type = type;
 		this.title = title;
 		this.workPackage = workPackage;
 		this.feature = feature;
+		this.components = components;
 	}
 
 	/**
@@ -61,6 +68,13 @@ public class JiraTicket {
 	 */
 	public String getFeature() {
 		return feature;
+	}
+
+	/**
+	 * Get the assigned components of this ticket.
+	 */
+	public List<String> getComponents() {
+		return components;
 	}
 
 	/**

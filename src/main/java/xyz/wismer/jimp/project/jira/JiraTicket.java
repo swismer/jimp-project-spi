@@ -13,26 +13,28 @@ public class JiraTicket {
 	private final String workPackage;
 	private final String feature;
 	private final List<String> components;
+	private final List<String> labels;
 
 	private String assignee;
 	private Duration timeSpent;
 	private Duration timeEstimate;
 
 	public JiraTicket(String id, String type, String title) {
-		this(id, type, title, null, null, List.of());
+		this(id, type, title, null, null, List.of(), List.of());
 	}
 
 	public JiraTicket(String id, String type, String title, String workPackage, String feature) {
-		this(id, type, title, workPackage, feature, List.of());
+		this(id, type, title, workPackage, feature, List.of(), List.of());
 	}
 
-	public JiraTicket(String id, String type, String title, String workPackage, String feature, List<String> components) {
+	public JiraTicket(String id, String type, String title, String workPackage, String feature, List<String> components, List<String> labels) {
 		this.id = id;
 		this.type = type;
 		this.title = title;
 		this.workPackage = workPackage;
 		this.feature = feature;
 		this.components = components;
+		this.labels = labels;
 	}
 
 	/**
@@ -75,6 +77,13 @@ public class JiraTicket {
 	 */
 	public List<String> getComponents() {
 		return components;
+	}
+
+	/**
+	 * Get the assigned labels of this ticket.
+	 */
+	public List<String> getLabels() {
+		return labels;
 	}
 
 	/**
